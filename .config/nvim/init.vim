@@ -7,159 +7,37 @@
 "     \ \ \     / / /\/___/ // / /___/ /\ \      / / /__\/ / / / /___/ /\ \      / / /    / / /
 " _    \ \ \   / / /   / / // / /_____/ /\ \    / / /_____/ / / /_____/ /\ \   / / /    / / /
 "/_/\__/ / /  / / /   / / // /_________/\ \ \  / / /\ \ \  / /_________/\ \ \  / / /    / / /
-            "\ \/___/ /  / / /   / / // / /_       __\ \_\/ / /  \ \ \/ / /_       __\ \_\/ / /    / / /
+"\ \/___/ /  / / /   / / // / /_       __\ \_\/ / /  \ \ \/ / /_       __\ \_\/ / /    / / /
 " \_____\/   \/_/    \/_/ \_\___\     /____/_/\/_/    \_\/\_\___\     /____/_/\/_/     \/_/
 "
-if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
-    " Download VIM-plug
-    echo "Downloading junegunn/vim-plug to manage plugins..."
-    silent !mkdir -p ~/.config/nvim/autoload/
-    silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
-    autocmd VimEnter * PlugInstall
-endif
 
-call plug#begin()
-
-" ====== Appearance ======
-Plug 'sheerun/vim-polyglot'
-Plug 'ryanoasis/vim-devicons'
-Plug 'vim-airline/vim-airline'
-Plug 'frazrepo/vim-rainbow'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'junegunn/goyo.vim'
-Plug 'rakr/vim-one'
-
-" ====== Files ======
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'liuchengxu/vim-clap'
-
-" ====== Editor ======
-Plug 'psliwka/vim-smoothie'
-Plug 'easymotion/vim-easymotion'
-Plug 'preservim/nerdcommenter'
-Plug 'wellle/targets.vim'
-Plug 'unblevable/quick-scope'
-
-" ====== Git ======
-Plug 'rhysd/git-messenger.vim'
-Plug 'airblade/vim-gitgutter'
-
-" ====== Helpers ======
-Plug 'andymass/vim-matchup'
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-surround'
-Plug 'honza/vim-snippets'
-Plug 'mileszs/ack.vim'
-Plug 'thaerkh/vim-workspace'
-Plug 'liuchengxu/vim-clap'
-Plug 'liuchengxu/vista.vim'
-
-" ====== languages tools ======
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" ====== Languages ======
-" Dart
-Plug 'dart-lang/dart-vim-plugin'
-" Golang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-call plug#end()
-
-""""""Looks
-set termguicolors
-colorscheme one
-let g:one_allow_italics = 1 " italics comments
-
-"" Basic Configurations
-set nocompatible
-filetype plugin indent on
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent copyindent smartindent
-set incsearch ignorecase smartcase hlsearch
-set ruler laststatus=2 showcmd
-set list listchars=trail:»,tab:»-
-set nowrap
-set encoding=utf-8
-set number
-set title
-set mouse=a " mouse support in all modes
-set noshowmode " Hide INSERT/VISUAL messages
-set lazyredraw " Don't redraw while performing a macro
-set clipboard+=unnamedplus
-set textwidth=79
-set formatoptions=tcqrn1
-set noshiftround
-set confirm
-set undodir=~/.local/share/nvim/undodir
-set undofile
-set backspace=indent,eol,start " Fix backspace indentt
-au CursorHold * checktime
-
-let mapleader ="\<Space>" " leader key
+source $HOME/.config/nvim/nconfs/general.vim
+source $HOME/.config/nvim/nconfs/mappings.vim
+source $HOME/.config/nvim/nconfs/plugConfs/plugins.vim
+source $HOME/.config/nvim/nconfs/plugConfs/airline.vim
+source $HOME/.config/nvim/nconfs/theme.vim
 
 
 
-autocmd BufWritePre * %s/\s\+$//e "Remove trailing whitespace on save
+" Speeds up startup time
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python'
 
-" Return to the last edit position when returning to a buffer
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" autocmd BufWritePre * %s/\s\+$//e "Remove trailing whitespace on save
+
+" " Return to the last edit position when returning to a buffer
+" autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " ************** Custom Mapping *****************
 
-" Alias replace all to S
-nnoremap S :%s//gI<Left><Left><Left>
-" esc key to go normal mode in terminal
-tnoremap <Esc> <C-\><C-n>
-"to quit file
-nnoremap <leader>q :wq<CR>
-"to save file
-nnoremap <Leader>w :w<CR>
-" *** Buffer Mapping ***
-nnoremap <Leader>h :bprevious<CR>
-nnoremap <Leader>l :bnext<CR>
-nnoremap <Leader>k :bfirst<CR>
-nnoremap <Leader>j :blast<CR>
-nnoremap <Leader>d :bdelete<CR>
-nnoremap <F10> :ls<CR>
-"********************************
-
-" Coc-config file
-nnoremap <F12> :CocConfig<CR>
-" init.vim/vimrc
-nnoremap <F9> :e ~/.config/nvim/init.vim<CR>
-"remove highlighting
-nnoremap <leader><leader> :nohlsearch<CR>
-"fuzzy finding
-nnoremap <leader>z :Ack!<space>
-let g:ackprg = 'ag --nogroup --nocolor --column'
-
-"split configuration
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-set splitbelow splitright
-" Go to the first non-blank character of a line
-noremap 0 ^
-" Just in case you need to go to the very beginning of a line
-noremap ^ 0
-
-" Map jj to escape so that you can exit insert mode easily
-inoremap jj <Esc>
-
-" Reload VIM RC
-command! Reloadrc source $MYVIMRC
-nnoremap <leader>rr :Reloadrc<cr>
-
-" Move buffers
-nnoremap gb :bprevious<CR>
-nnoremap gn :bnext<CR>
-
-" Move around in insert mode, handy with auto insert braces etc.
-inoremap <M-l> <right>
-inoremap <M-h> <left>
 
 " ***********************Plugin Configurations*************************
+" VIM-workspace
+let g:workspace_autosave = 0
+let g:workspace_autosave_untrailspaces = 0
+" Git Messenger
+nmap <Leader>m <Plug>(git-messenger)
+
 "fzf
 " Ctrl+t to search for a file in the current directory
 nnoremap <silent> <expr> <C-t> (len(system('git rev-parse')) ?
@@ -185,50 +63,26 @@ let g:qs_lazy_highlight = 1
 let g:qs_buftype_blacklist = ['terminal', 'nofile']
 
 "NerdCommenter
+"Toggle comments in source code
+let g:NERDToggleCheckAllLines = 1
+let g:NERDSpaceDelims = 1
+
+" Add spaces after comment
+let g:NERDSpaceDelims = 1
 nmap <leader>/ <plug>NERDCommenterToggle
 xmap <leader>/ <plug>NERDCommenterToggle
 
-"Airline
-let g:airline_powerline_fonts = 1
-"let g:airline_theme='random'
-let g:airline_theme = 'one'
-let g:airline#extensions#tabline#enabled = 1
-
-"Vista
-" How each level is indented and what to prepend.
-" This could make the display more compact or more spacious.
-" e.g., more compact: ["▸ ", ""]
-" Note: this option only works the LSP executives, doesn't work for `:Vista ctags`.
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-
-" Executive used when opening vista sidebar without specifying it.
-" See all the avaliable executives via `:echo g:vista#executives`.
-let g:vista_default_executive = 'coc'
-" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
-let g:vista#renderer#enable_icon = 1
-
-" The default icons can't be suitable for all the filetypes, you can extend it as you wish.
-let g:vista#renderer#icons = {
-            \   "function": "\uf794",
-            \   "variable": "\uf71b",
-            \  }
 
 
 "Coc.nvim
 
-nmap <M-t> :CocCommand explorer<CR>
+" To get correct comment highlighting for json
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
-"experiment
-" Complete with enter
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-set hidden
-set nobackup
-set nowritebackup
-set cmdheight=2
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
+nmap <M-e> :CocCommand explorer<CR>
+
+
 
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
@@ -281,8 +135,6 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -296,28 +148,10 @@ augroup mygroup
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-" Remap keys for applying codeAction to the current line.
-nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>.  <Plug>(coc-fix-current)
 
-" Introduce function text object
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Use <TAB> for selections ranges.
-" NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -335,12 +169,29 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
 " Show all diagnostics.
-"nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 "" Manage extensions.
-"nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 "" Show commands.
-"nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 "" Search workspace symbols.
-"nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+    execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+
+
+" Experiments {{ "
+" autocmd Filetype dart nnoremap <F5> :CocCommand flutter.run<CR>
+" autocmd Filetype dart nnoremap <F6> :CocCommand flutter.pub.get<CR>
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+" }} "
+
+

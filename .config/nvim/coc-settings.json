@@ -1,6 +1,14 @@
 {
     "python.jediEnabled": true,
+    "coc.preferences.formatOnSaveFiletypes": [
+      "dart"
+    ],
     "explorer.icon.enableNerdfont": true,
+    "codeLens.enable": true,
+    "explorer.position": "left",
+    "explorer.width": 30,
+    "explorer.previewAction.onHover": false,
+    "explorer.contentWidth": -5,
     "explorer.keyMappings": {
     "i": "unmap", // cancel default mapkey
 
