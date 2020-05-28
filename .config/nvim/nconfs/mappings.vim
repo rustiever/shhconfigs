@@ -1,5 +1,5 @@
 " Coc-config file
-nnoremap <F12> :CocConfig<CR>
+" nnoremap <F12> :CocConfig<CR>
 
 let mapleader ="\<Space>" " leader key
 

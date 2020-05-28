@@ -51,5 +51,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dart-lang/dart-vim-plugin'
 " Golang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
+" Rust
+Plug 'rust-lang/rust.vim'
 call plug#end()
