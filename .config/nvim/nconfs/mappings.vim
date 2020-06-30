@@ -1,5 +1,5 @@
 " Coc-config file
-" nnoremap <F12> :CocConfig<CR>
+nnoremap <F12> :CocConfig<CR>
 
 let mapleader ="\<Space>" " leader key
 
@@ -62,7 +62,7 @@ nnoremap <silent> <Leader>q  :q<CR>
 nnoremap <silent> <Leader>Q  :qa!<CR>
     " }
 " esc key to go normal mode in terminal
-tnoremap <Esc> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>i
 "********************************
 
 " init.vim/vimrc

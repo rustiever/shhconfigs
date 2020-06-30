@@ -117,3 +117,6 @@ export HISTIGNORE="&:history:exit: *"
 export PATH="$PATH:/Users/sharan/Developer/flutter/bin"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 alias config='/usr/bin/git --git-dir=/Users/sharan/.shhconfigs/ --work-tree=/Users/sharan'
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/llvm/lib"
+export CPPFLAGS="-I/usr/local/opt/llvm/include"

@@ -20,7 +20,7 @@ set ignorecase     " Case insensitive search
 set smartcase      " ... but case sensitive when uc present
 set scrolljump=5   " Line to scroll when cursor leaves screen
 set scrolloff=3    " Minumum lines to keep above and below cursor
-set wrap           " Wrap long lines
+" set wrap           " Wrap long lines
 set shiftwidth=4   " Use indents of 4 spaces
 set tabstop=2      " An indentation every four columns
 set softtabstop=2  " Let backspace delete indent
